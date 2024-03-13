@@ -1,4 +1,6 @@
-from ops import *
+import seller as slr
+import buyer as byr
+from db import inventory as inv
 
 while True:
     ch = int(
@@ -6,24 +8,21 @@ while True:
             """
 Welcome to the Inventory
 
-1) View inventory
-2) Add Item
-3) Remove Item
-4) Update Item information
-5) Exit
+1) Buyer
+2) Seller
+3) View inventory
+4) Exit
 
 Enter choice: """
         )
     )
     if ch == 1:
-        show()
+        byr.show()
     elif ch == 2:
-        add()
+        slr.show()
     elif ch == 3:
-        remove()
+        inv.show()
     elif ch == 4:
-        update()
-    elif ch == 5:
         exit()
     else:
         print("Bad Choice. Try again")

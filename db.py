@@ -1,5 +1,5 @@
-from typing import Generator
-
+import tabulate as tb
+from typing import Generator, Tuple
 import sqlite3
 
 
@@ -41,3 +41,22 @@ class Inventory:
     def getItems(self) -> Generator:
         for row in self.cursor.execute("SELECT * FROM INV"):
             yield row
+
+    def getItem(self, name: str) -> Tuple:
+        return self.cursor.execute(
+            f"SELECT * FROM INV WHERE PROD_NAME='{name}'"
+        ).fetchone()
+
+    def show(self) -> None:
+        print(
+            tb.tabulate(
+                tabular_data=self.getItems(),
+                headers=["Product Name", "Quantity", "Cost per Item"],
+                tablefmt="outline",
+                numalign="center",
+                stralign="center",
+            )
+        )
+
+
+inventory = Inventory()
